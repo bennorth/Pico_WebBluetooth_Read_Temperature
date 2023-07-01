@@ -88,10 +88,17 @@
           return;
         }
 
-        device = await navigator.bluetooth.requestDevice({
-          acceptAllDevices: true,
-          optionalServices: ['0000181a-0000-1000-8000-00805f9b34fb'] 
-        });
+        let filters = [];
+		    // name is eg "Pico 28:CD:C1:0B:EA:62"
+		    filters.push({
+			    namePrefix: "Pico "
+		    });
+		    let options = {
+			    "optionalServices": ['0000181a-0000-1000-8000-00805f9b34fb']
+		    };
+		    options.filters = filters;
+
+        device = await navigator.bluetooth.requestDevice(options);
 
         log('Connecting to GATT Server...');
         const server = await device.gatt.connect();
