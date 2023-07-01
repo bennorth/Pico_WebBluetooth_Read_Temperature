@@ -1,5 +1,5 @@
 # This example demonstrates a simple temperature sensor peripheral.
-# https://github.com/raspberrypi/pico-micropython-examples/blob/master/bluetooth/picow_ble_temp_sensor.py
+#
 # The sensor's local value is updated, and it will notify
 # any connected central every 10 seconds.
 
@@ -69,7 +69,8 @@ class BLETemperature:
         # Write the local value, ready for a central to read.
         temp_deg_c = self._get_temp()
         print("write temp %.2f degc" % temp_deg_c);
-        self._ble.gatts_write(self._handle, struct.pack("<h", int(temp_deg_c * 100)))
+        self._ble.gatts_write(self._handle, '{"device":"Pico W", "temperatureC":'+str(temp_deg_c)+'}')
+        
         if notify or indicate:
             for conn_handle in self._connections:
                 if notify:
@@ -105,3 +106,4 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
