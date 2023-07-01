@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Raspberry Pico Web Bluetooth Serial Monitor</title>
+  <title>Raspberry Pico Web Bluetooth Serial Monitor https://github.com/murkle/Pico_WebBluetooth_Read_Temperature/blob/main/index.html</title>
   <meta charset="UTF-8">
   <style>
     body {
@@ -87,16 +87,16 @@
           log('Already connected to ' + device.name);
           return;
         }
-
-        let filters = [];
-		    // name is eg "Pico 28:CD:C1:0B:EA:62"
-		    filters.push({
-			    namePrefix: "Pico "
-		    });
-		    let options = {
-			    "optionalServices": ['0000181a-0000-1000-8000-00805f9b34fb']
-		    };
-		    options.filters = filters;
+		
+		let filters = [];
+		// name is eg "Pico 28:CD:C1:0B:EA:62"
+		filters.push({
+			namePrefix: "Pico "
+		});
+		let options = {
+			"optionalServices": ['0000181a-0000-1000-8000-00805f9b34fb']
+		};
+		options.filters = filters;
 
         device = await navigator.bluetooth.requestDevice(options);
 
@@ -141,9 +141,16 @@
     }
 
     function handleData(event) {
-      const value = event.target.value;
-      const temperatureData = new Int16Array(value.buffer);
-      const temperature = temperatureData[0] / 100.0;
+      const jsonBytes = new Uint8Array(event.target.value.buffer);
+	  
+	  const jsonString = String.fromCharCode(...jsonBytes);
+	  
+	  // eg {"device":"Pico W", "temperatureC":35.00288}
+	  const json = JSON.parse(jsonString);
+	  
+	  console.log("from device", json);
+	  
+      const temperature = json.temperatureC;
 
       const temperatureBox = document.createElement('div');
       temperatureBox.classList.add('temperature-box');
