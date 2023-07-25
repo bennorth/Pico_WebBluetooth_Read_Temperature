@@ -33,7 +33,7 @@
   function log(message) {
       const logEntry = document.createElement('div');
       logEntry.classList.add('log-entry');
-      logEntry.innerText = message;
+      logEntry.innerText = (new Date().toISOString()) + " : " + message;
 
       logElement.appendChild(logEntry);
   }
