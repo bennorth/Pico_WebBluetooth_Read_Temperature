@@ -93,6 +93,11 @@
 
       log('Getting Temperature Characteristic...');
       const characteristic = await service.getCharacteristic(UUID_TEMPERATURE_CHARACTERISTIC);
+
+      handlerClosureId += 1;
+      const handleData = newHandleDataFun(handlerClosureId);
+
+      log("Adding event listener with handlerClosureId " + handlerClosureId);
       characteristic.addEventListener('characteristicvaluechanged', handleData);
 
       log('Enabling notifications...');
