@@ -80,6 +80,7 @@
       log('Notifications have been started.');
   }
 
+  let handlerClosureId = 5000;
   async function connectToDevice(device) {
 
       device.addEventListener('gattserverdisconnected', onDisconnected);
