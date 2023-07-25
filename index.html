@@ -100,13 +100,6 @@
 
   }
 
-  function handleDistanceChanged(event) {
-      const value = event.target.value;
-      log('Got distance: ' + value.getFloat32(0, true));
-
-      document.getElementById("result").innerHTML = "Distance = " + value.getFloat32(0, true).toFixed(4) + " m";
-  }
-
   function handleData(event) {
       const jsonBytes = new Uint8Array(event.target.value.buffer);
 
