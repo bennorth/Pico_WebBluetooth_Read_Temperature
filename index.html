@@ -91,7 +91,7 @@
       log('Getting Service...');
       const service = await server.getPrimaryService(UUID_ENVIRONMENTAL_SENSING_SERVICE);
 
-      log('Getting Serial Port Read Characteristic...');
+      log('Getting Temperature Characteristic...');
       const characteristic = await service.getCharacteristic(UUID_TEMPERATURE_CHARACTERISTIC);
       characteristic.addEventListener('characteristicvaluechanged', handleData);
 
