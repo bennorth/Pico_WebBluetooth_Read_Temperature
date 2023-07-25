@@ -135,14 +135,6 @@
       log(`Device ${device.name} is disconnected.`);
   }
 
-  function log(message) {
-      const logEntry = document.createElement('div');
-      logEntry.classList.add('log-entry');
-      logEntry.innerText = message;
-
-      logElement.appendChild(logEntry);
-  }
-
   // https://docs.google.com/document/d/1RF4D-60cQJWR1LoQeLBxxigrxJwYS8nLOE0qWmBF1eo/edit
   // try to connect to existing device
   async function getPermittedBluetoothDevices() {
