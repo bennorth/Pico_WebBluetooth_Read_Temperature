@@ -98,10 +98,10 @@ def demo():
     counter = 0
     led = Pin('LED', Pin.OUT)
     while True:
-        if counter % 10 == 0:
+        if counter % 2 == 0:
             temp.update_temperature(notify=True, indicate=False)
         led.toggle()
-        time.sleep_ms(1000)
+        time.sleep_ms(250)
         counter += 1
 
 if __name__ == "__main__":
