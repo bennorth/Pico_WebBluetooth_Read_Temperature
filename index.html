@@ -94,6 +94,9 @@
       log('Getting Temperature Characteristic...');
       const characteristic = await service.getCharacteristic(UUID_TEMPERATURE_CHARACTERISTIC);
 
+      log("Stopping notifications");
+      await characteristic.stopNotifications();
+
       handlerClosureId += 1;
       const handleData = newHandleDataFun(handlerClosureId);
 
