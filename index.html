@@ -101,7 +101,9 @@
 
   }
 
-  function handleData(event) {
+  function newHandleDataFun(id) {
+    log("making event listener with id " + id);
+    return (event) => {
       const jsonBytes = new Uint8Array(event.target.value.buffer);
 
       const jsonString = String.fromCharCode(...jsonBytes);
@@ -113,11 +115,13 @@
 
       const temperature = json.temperatureC;
 
-      log('Got temp: ' + temperature);
+      log('Got temp: ' + temperature + " / " + id);
 
       document.getElementById("result").innerHTML = "Pico internal Temperature = " + temperature.toFixed(1) + " °C";
 
+    };
   }
+
   function onDisconnected(event) {
       const device = event.target;
       log(`Device ${device.name} is disconnected.`);
